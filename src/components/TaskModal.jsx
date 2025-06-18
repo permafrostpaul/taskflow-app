@@ -1,4 +1,5 @@
 // FILE: src/components/TaskModal.jsx
+// Updated to include a time input field.
 
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
@@ -30,20 +31,23 @@ export default function TaskModal({ isOpen, onRequestClose, onSave, taskToEdit }
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [dueDate, setDueDate] = useState('');
+    const [dueTime, setDueTime] = useState('');
     const [priority, setPriority] = useState('medium');
     
     useEffect(() => {
         if (taskToEdit) {
+            const date = parseISO(taskToEdit.dueDate);
             setTitle(taskToEdit.title);
-            setDescription(taskToEdit.description || ''); // Handle case where description is null/undefined
-            // Ensure dueDate is valid before formatting
-            setDueDate(taskToEdit.dueDate ? format(parseISO(taskToEdit.dueDate), 'yyyy-MM-dd') : '');
+            setDescription(taskToEdit.description || '');
+            setDueDate(format(date, 'yyyy-MM-dd'));
+            setDueTime(format(date, 'HH:mm'));
             setPriority(taskToEdit.priority);
         } else {
             // Reset form for new task
             setTitle('');
             setDescription('');
             setDueDate('');
+            setDueTime('');
             setPriority('medium');
         }
     }, [taskToEdit, isOpen]);
@@ -54,7 +58,8 @@ export default function TaskModal({ isOpen, onRequestClose, onSave, taskToEdit }
             id: taskToEdit ? taskToEdit.id : null,
             title, 
             description, 
-            dueDate, 
+            dueDate,
+            dueTime, // Pass the time separately
             priority,
             completed: taskToEdit ? taskToEdit.completed : false
         });
@@ -81,9 +86,15 @@ export default function TaskModal({ isOpen, onRequestClose, onSave, taskToEdit }
                         <label htmlFor="description" className="block text-sm font-medium text-gray-400 mb-1">Description</label>
                         <textarea id="description" value={description} onChange={(e) => setDescription(e.target.value)} rows="3" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                     </div>
-                    <div>
-                        <label htmlFor="dueDate" className="block text-sm font-medium text-gray-400 mb-1">Due Date</label>
-                        <input type="date" id="dueDate" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label htmlFor="dueDate" className="block text-sm font-medium text-gray-400 mb-1">Due Date</label>
+                            <input type="date" id="dueDate" value={dueDate} onChange={(e) => setDueDate(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                        </div>
+                        <div>
+                            <label htmlFor="dueTime" className="block text-sm font-medium text-gray-400 mb-1">Due Time</label>
+                            <input type="time" id="dueTime" value={dueTime} onChange={(e) => setDueTime(e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        </div>
                     </div>
                     <div>
                         <label htmlFor="priority" className="block text-sm font-medium text-gray-400 mb-1">Priority</label>
