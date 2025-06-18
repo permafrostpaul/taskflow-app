@@ -4,15 +4,12 @@ TaskFlow is a modern, single-page application designed to help users manage thei
 
 ## 🚀 Live Demo
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/YOUR_NETLIFY_BADGE_ID/deploy-status)](https://app.netlify.com/sites/YOUR_NETLIFY_SITE_NAME/deploys)
-
 This project is deployed and live on Netlify. You can try it out here:
 
-**[https://YOUR_NETLIFY_SITE_NAME.netlify.app/](https://YOUR_NETLIFY_SITE_NAME.netlify.app/)**
+**[https://YOUR_NETLIFY_SITE_NAME.netlify.app/](https://taskflow-ph.netlify.app/)**
 
 ---
 
-![TaskFlow Screenshot](https://placehold.co/800x400/0f172a/ffffff?text=TaskFlow+App+Screenshot)
 
 ## ✨ Features
 
