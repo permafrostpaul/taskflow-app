@@ -6,7 +6,7 @@ TaskFlow is a modern, single-page application designed to help users manage thei
 
 This project is deployed and live on Netlify. You can try it out here:
 
-**[https://YOUR_NETLIFY_SITE_NAME.netlify.app/](https://taskflow-ph.netlify.app/)**
+**[https://taskflow-ph.netlify.app/](https://taskflow-ph.netlify.app/)**
 
 ---
 
